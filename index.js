@@ -1,10 +1,19 @@
-//Database
-require("./DB/db");
 const express= require("express");
+//Database
+require("dotenv").config();
+const mongoose = require("mongoose");
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('Connected Successfully to MongoDB'))
+  .catch((error) => console.error('Failed to connect to MongoDB!', error));
+
 var cors= require("cors");
 var cookieParser = require('cookie-parser')
 
-const PORT=8000;
+const PORT= process.env.PORT || 8000;
 //Render
 const app=express();
 
